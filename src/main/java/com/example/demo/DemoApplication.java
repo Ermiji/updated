@@ -42,12 +42,23 @@ public class DemoApplication {
             User user = restTemplate.getForObject("https://api.github.com/users/bilu-Blen", User.class);
             log.info(user.toString());
 
+
             ResponseEntity<List<User>> memberResponse =
                     restTemplate.exchange("https://api.github.com/orgs/github/members",
                             HttpMethod.GET, null, new ParameterizedTypeReference<List<User>>() {
                             });
             List<User> users = memberResponse.getBody();
             log.info(users.toString());
+            for(User user1: users){
+                log.info(user1.getLogin());
+
+            }
+
+//            for(int i = 0; i <=users.toString().length(); i++){
+//                users.add(user);
+//                log.info(user.getLogin());
+//            }
+//            log.info(users.toString().);
 
         };
 

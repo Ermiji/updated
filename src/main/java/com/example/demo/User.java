@@ -30,9 +30,9 @@ public class User {
 
     @Override
     public String toString(){
-        return "People{" +
+        return "{" +
                 "login='"+ login + '\''+
                 ", id=" + id +
-                '}';
+                "}\n";
     }
 }

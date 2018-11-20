@@ -56,8 +56,24 @@ public class DemoApplication {
                             });
             List<Repo> repos = repoResponse.getBody();
 //            log.info(repos.toString());
+            int count= 0;
             for (Repo repo1 : repos) {
                 log.info(repo1.getName());
+                log.info(repo1.getPulls_url());
+                //taking out the last part https://api.github.com/repos/bilu-Blen/Arrays/pulls{/number}
+                String str = repo1.getPulls_url();
+                int index = str.lastIndexOf('{');
+                str = str.substring(0,index);
+                ResponseEntity<List<Pull>> pullResponse =
+                        restTemplate.exchange(str,
+                                HttpMethod.GET, null, new ParameterizedTypeReference<List<Pull>>() {
+                                });
+                List<Pull> pulls = pullResponse.getBody();
+
+                for(Pull pull :pulls){
+                    count = count + 1;
+                }
+                System.out.println(count);
 
             }
 

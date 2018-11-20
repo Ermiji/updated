@@ -6,13 +6,28 @@ public class Repo {
     private long id;
     private String name;
     private User user;
-    private long forks_cunt;
+    private String pulls_url;
+    private long forks;
     private long traffic_views_uniques;
     private long traffic_clones_uniques;
 
     private Set<String> languages;
     private Set<String> pulls;
 
+    public long getForks() {
+        return forks;
+    }
+
+    public void setForks(long forks) {
+        this.forks = forks;
+    }
+    public String getPulls_url() {
+        return pulls_url;
+    }
+
+    public void setPulls_url(String pulls_url) {
+        this.pulls_url = pulls_url;
+    }
     public long getId() {
         return id;
     }
@@ -37,13 +52,7 @@ public class Repo {
         this.user = user;
     }
 
-    public long getForks_cunt() {
-        return forks_cunt;
-    }
 
-    public void setForks_cunt(long forks_cunt) {
-        this.forks_cunt = forks_cunt;
-    }
 
     public long getTraffic_views_uniques() {
         return traffic_views_uniques;
@@ -80,7 +89,9 @@ public class Repo {
     @Override
     public String toString(){
         return "{" +
-                "name='"+ name
-                ;
+                "name='"+ name +
+                "pulls_url" + pulls_url +
+                "forks" + forks+
+                "}";
     }
 }

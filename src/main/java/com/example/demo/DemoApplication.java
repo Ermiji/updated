@@ -39,12 +39,17 @@ public class DemoApplication {
             User user = restTemplate.getForObject("https://api.github.com/users/bilu-Blen", User.class);
             log.info(user.toString());
             user.setRepos_url(user.getRepos_url());
-
+            user.setFollowers_url(user.getFollowers_url());
+            //followers url
             log.info(user.getRepos_url());
 
-          /*  Repo repo = restTemplate.getForObject("https://api.github.com/users/bilu-Blen/repos", Repo.class );
-            log.info(repo.toString());*/
+            //followers
+            System.out.println(user.getFollowers());
 
+            //following
+            System.out.println(user.getFollowing());
+
+            //since it is an array what is returned use this method
             ResponseEntity<List<Repo>> repoResponse =
                     restTemplate.exchange(user.getRepos_url(),
                             HttpMethod.GET, null, new ParameterizedTypeReference<List<Repo>>() {
@@ -53,7 +58,14 @@ public class DemoApplication {
 //            log.info(repos.toString());
             for (Repo repo1 : repos) {
                 log.info(repo1.getName());
+
             }
+
+
+
+
+
+
 // getting members of a company
 
           /*  Orgs orgs = restTemplate.getForObject("https://api.github.com/orgs/github", Orgs.class);

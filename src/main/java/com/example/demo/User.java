@@ -11,6 +11,26 @@ public class User {
     private String login;
     private long id;
     private String repos_url;
+    private String followers_url;
+    private int followers;
+    private int following;
+
+    public int getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(int following) {
+        this.following = following;
+    }
+
+    public String getFollowers_url() {
+        return followers_url;
+    }
+
+    public void setFollowers_url(String followers_url) {
+        this.followers_url = followers_url;
+    }
+
 
     public String getRepos_url() {
         return repos_url;
@@ -45,6 +65,17 @@ public class User {
                 "login='"+ login + '\''+
                 ", id=" + id +
                 ", repos_url" + repos_url+
-                "}\n";
+                ", followers_url" + followers_url +
+                ", followers" + followers +
+                ", following" + following+
+                "\n}";
+    }
+
+    public int getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(int followers) {
+        this.followers = followers;
     }
 }

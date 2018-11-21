@@ -10,10 +10,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -32,11 +32,33 @@ public class DemoApplication {
         return builder.build();
     }
 
+    private static void getUsingToken(){
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "token "+"4b908d085de874ddeb0fc04d340e11375a8ba034");
+
+
+
+        HttpEntity<String> entity = new HttpEntity<String>( headers);
+        restTemplate.put("https://api.github.com", entity);
+
+
+
+	   /* final String uri =  "https://api.github.com/?access_token=4b908d085de874ddeb0fc04d340e11375a8ba034";
+        RestTemplate restTemplate = new RestTemplate();
+        String result = restTemplate.getForObject(uri, String.class);
+        System.out.println(result);*/
+	}
+
+
     @Bean
     public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
         return (String... args) -> {
 
-            User user = restTemplate.getForObject("https://api.github.com/users/bilu-Blen", User.class);
+            User user = restTemplate.getForObject("https://api.github.com/users/bilu-Blen",  User.class);
+
             log.info(user.toString());
             user.setRepos_url(user.getRepos_url());
             user.setFollowers_url(user.getFollowers_url());
@@ -48,11 +70,10 @@ public class DemoApplication {
 
             //following
             System.out.println(user.getFollowing());
-
             //since it is an array what is returned use this method
             ResponseEntity<List<Repo>> repoResponse =
                     restTemplate.exchange(user.getRepos_url(),
-                            HttpMethod.GET, null, new ParameterizedTypeReference<List<Repo>>() {
+                            HttpMethod.GET,null, new ParameterizedTypeReference<List<Repo>>() {
                             });
             List<Repo> repos = repoResponse.getBody();
 //            log.info(repos.toString());
@@ -60,10 +81,12 @@ public class DemoApplication {
             for (Repo repo1 : repos) {
                 log.info(repo1.getName());
                 log.info(repo1.getPulls_url());
+                System.out.println(repo1.getForks());
                 //taking out the last part https://api.github.com/repos/bilu-Blen/Arrays/pulls{/number}
                 String str = repo1.getPulls_url();
                 int index = str.lastIndexOf('{');
                 str = str.substring(0,index);
+            //getting pull request numbers
                 ResponseEntity<List<Pull>> pullResponse =
                         restTemplate.exchange(str,
                                 HttpMethod.GET, null, new ParameterizedTypeReference<List<Pull>>() {
@@ -74,6 +97,8 @@ public class DemoApplication {
                     count = count + 1;
                 }
                 System.out.println(count);
+
+
 
             }
 

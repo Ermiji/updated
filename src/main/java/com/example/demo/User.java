@@ -66,8 +66,8 @@ public class User {
         return "{" +
                 "login='"+ login + '\''+
                 ", id=" + id +
-                ", repos_url" + repos_url+
-                ", followers_url" + followers_url +
+                ", repos_url " + repos_url+
+                ", followers_url " + followers_url +
                 ", followers" + followers +
                 ", following" + following+
                 "\n}";

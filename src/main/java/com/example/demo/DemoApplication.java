@@ -34,14 +34,14 @@ public class DemoApplication {
 
     private static void getUsingToken(){
         RestTemplate restTemplate = new RestTemplate();
-        String token = "566e6a1edf22a0758b2343ea38eaa04a531a27eb";
+        String token = "yourtokenhere";
 	}
 
 
     @Bean
     public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
         return (String... args) -> {
-            String token = "yourtokenher";
+            String token = "yourtokenhere";
 
             User user = restTemplate.getForObject("https://api.github.com/users/bilu-Blen?access_token="+token,  User.class);
 

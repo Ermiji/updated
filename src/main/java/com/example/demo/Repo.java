@@ -90,8 +90,8 @@ public class Repo {
     public String toString(){
         return "{" +
                 "name='"+ name +
-                "pulls_url" + pulls_url +
-                "forks" + forks+
+                "pulls_url=" + pulls_url +
+                "forks=" + forks+
                 "}";
     }
 }

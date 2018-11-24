@@ -34,65 +34,52 @@ public class DemoApplication {
 
     private static void getUsingToken(){
         RestTemplate restTemplate = new RestTemplate();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "token "+"4b908d085de874ddeb0fc04d340e11375a8ba034");
-
-
-
-        HttpEntity<String> entity = new HttpEntity<String>( headers);
-        restTemplate.put("https://api.github.com", entity);
-
-
-
-	   /* final String uri =  "https://api.github.com/?access_token=4b908d085de874ddeb0fc04d340e11375a8ba034";
-        RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.getForObject(uri, String.class);
-        System.out.println(result);*/
+        String token = "566e6a1edf22a0758b2343ea38eaa04a531a27eb";
 	}
 
 
     @Bean
     public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
         return (String... args) -> {
+            String token = "yourtokenher";
 
-            User user = restTemplate.getForObject("https://api.github.com/users/bilu-Blen",  User.class);
+            User user = restTemplate.getForObject("https://api.github.com/users/bilu-Blen?access_token="+token,  User.class);
 
             log.info(user.toString());
             user.setRepos_url(user.getRepos_url());
-            user.setFollowers_url(user.getFollowers_url());
-            //followers url
-            log.info(user.getRepos_url());
 
-            //followers
-            System.out.println(user.getFollowers());
+ /*These work to get  the number of followers on following
+       //following
+        System.out.println(user.getFollowing());
+        //followers
+        System.out.println(user.getFollowers());*/
 
-            //following
-            System.out.println(user.getFollowing());
             //since it is an array what is returned use this method
             ResponseEntity<List<Repo>> repoResponse =
-                    restTemplate.exchange(user.getRepos_url(),
+                    restTemplate.exchange(user.getRepos_url()+"?access_token="+token,
                             HttpMethod.GET,null, new ParameterizedTypeReference<List<Repo>>() {
                             });
             List<Repo> repos = repoResponse.getBody();
-//            log.info(repos.toString());
+
             int count= 0;
             for (Repo repo1 : repos) {
-                log.info(repo1.getName());
+/*these get methods can be used on the repo to get the repo name, and forks
+               log.info(repo1.getName());
                 log.info(repo1.getPulls_url());
                 System.out.println(repo1.getForks());
-                //taking out the last part https://api.github.com/repos/bilu-Blen/Arrays/pulls{/number}
+*/
+    //taking out the last part https://api.github.com/repos/bilu-Blen/Arrays/pulls{/number}
                 String str = repo1.getPulls_url();
                 int index = str.lastIndexOf('{');
                 str = str.substring(0,index);
-            //getting pull request numbers
+
+    //getting pull request numbers
                 ResponseEntity<List<Pull>> pullResponse =
-                        restTemplate.exchange(str,
+                        restTemplate.exchange(str+"?access_token="+ token,
                                 HttpMethod.GET, null, new ParameterizedTypeReference<List<Pull>>() {
                                 });
                 List<Pull> pulls = pullResponse.getBody();
-
+//number of pulls
                 for(Pull pull :pulls){
                     count = count + 1;
                 }

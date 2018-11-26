@@ -2,19 +2,26 @@ package com.example.demo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.*;
 import java.net.URI;
 import java.net.URL;
+import java.util.Set;
 
-@JsonIgnoreProperties
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Entity
 public class User {
+    @Id
+    @GeneratedValue()
+    private long id;
 
     private String login;
-    private long id;
+
     private String repos_url;
     private int followers;
     private int following;
 
-
+    @OneToMany
+    private Set<Repo> repos;
 
     public int getFollowing() {
         return following;
@@ -69,5 +76,13 @@ public class User {
 
     public void setFollowers(int followers) {
         this.followers = followers;
+    }
+
+    public Set<Repo> getRepos() {
+        return repos;
+    }
+
+    public void setRepos(Set<Repo> repos) {
+        this.repos = repos;
     }
 }

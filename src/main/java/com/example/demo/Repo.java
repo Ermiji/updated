@@ -1,19 +1,31 @@
 package com.example.demo;
 
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.*;
+import java.util.Set;
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Entity
 public class Repo {
+
+    @Id
+    @GeneratedValue()
     private long id;
     private String name;
-    private User user;
+
     private String pulls_url;
     private String collaborators_url;
     private long forks;
     private long traffic_views_uniques;
     private long traffic_clones_uniques;
 
-    private Set<String> languages;
-    private Set<String> pulls;
+//    private Set<String> languages;
+//    private Set<String> pulls;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    //@JoinColumn(name = "user_id")
+    private User user;
+
 
 
     public String getCollaborators_url() {
@@ -79,21 +91,21 @@ public class Repo {
         this.traffic_clones_uniques = traffic_clones_uniques;
     }
 
-    public Set<String> getLanguages() {
-        return languages;
-    }
-
-    public void setLanguages(Set<String> languages) {
-        this.languages = languages;
-    }
-
-    public Set<String> getPulls() {
-        return pulls;
-    }
-
-    public void setPulls(Set<String> pulls) {
-        this.pulls = pulls;
-    }
+//    public Set<String> getLanguages() {
+//        return languages;
+//    }
+//
+//    public void setLanguages(Set<String> languages) {
+//        this.languages = languages;
+//    }
+//
+//    public Set<String> getPulls() {
+//        return pulls;
+//    }
+//
+//    public void setPulls(Set<String> pulls) {
+//        this.pulls = pulls;
+//    }
 
     @Override
     public String toString(){

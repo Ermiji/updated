@@ -1,9 +1,10 @@
 package com.example.demo;
 
-import javafx.application.Application;
+//import javafx.application.Application;
 import org.aspectj.weaver.ast.Or;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,8 +22,13 @@ import static java.net.URLEncoder.encode;
 
 @SpringBootApplication
 public class DemoApplication {
+    @Autowired
+    UserRepository userRepository;
 
-	private  static final Logger log = LoggerFactory.getLogger(Application.class);
+    @Autowired
+    RepoRepository repoRepository;
+
+	private  static final Logger log = LoggerFactory.getLogger(DemoApplication.class);
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class);
     }
@@ -34,19 +40,20 @@ public class DemoApplication {
 
     private static void getUsingToken(){
         RestTemplate restTemplate = new RestTemplate();
-        String token = "yourtokenhere";
+        String token = "yourtoken";
 	}
 
 
     @Bean
     public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
         return (String... args) -> {
-            String token = "yourtokenhere";
+            String token = "yourtoken";
 
-            User user = restTemplate.getForObject("https://api.github.com/users/bilu-Blen?access_token="+token,  User.class);
+            User user = restTemplate.getForObject("https://api.github.com/users/MelakMinlargilih?access_token="+token,  User.class);
 
             log.info(user.toString());
             user.setRepos_url(user.getRepos_url());
+            userRepository.save(user);
 
  /*These work to get  the number of followers on following
        //following
@@ -84,26 +91,25 @@ public class DemoApplication {
                     count = count + 1;
                 }
                 log.info(repo1.getName());
-
                 System.out.println("This is the count of pulls for this repo " + count);
 
-    // getting collaborators
-                String collaborators = repo1.getCollaborators_url();
-                //taking out the last part after { in, https://api.github.com/repos/bilu-Blen/ATMApp/collaborators{/collaborator}
-                index = collaborators.lastIndexOf('{');
-                collaborators = collaborators.substring(0, index);
-
-                ResponseEntity<List<Collaborators>> collaboratorsresponse =
-                restTemplate.exchange(collaborators + "?access_token=" + token,
-                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Collaborators>>() {
-                        });
-
-                List<Collaborators> collaboratorsList = collaboratorsresponse.getBody();
-
-                for(Collaborators collaborator : collaboratorsList){
-                    System.out.println("The collaborator/s is/are " + collaborator.getLogin());
-
-                }
+//    // getting collaborators
+//                String collaborators = repo1.getCollaborators_url();
+//                //taking out the last part after { in, https://api.github.com/repos/bilu-Blen/ATMApp/collaborators{/collaborator}
+//                index = collaborators.lastIndexOf('{');
+//                collaborators = collaborators.substring(0, index);
+//
+//                ResponseEntity<List<Collaborators>> collaboratorsresponse =
+//                restTemplate.exchange(collaborators + "?access_token=" + token,
+//                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Collaborators>>() {
+//                        });
+//
+//                List<Collaborators> collaboratorsList = collaboratorsresponse.getBody();
+//
+//                for(Collaborators collaborator : collaboratorsList){
+//                    System.out.println("The collaborator/s is/are " + collaborator.getLogin());
+//
+//                }
             }
 
 

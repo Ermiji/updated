@@ -83,10 +83,27 @@ public class DemoApplication {
                 for(Pull pull :pulls){
                     count = count + 1;
                 }
-                System.out.println(count);
+                log.info(repo1.getName());
 
+                System.out.println("This is the count of pulls for this repo " + count);
 
+    // getting collaborators
+                String collaborators = repo1.getCollaborators_url();
+                //taking out the last part after { in, https://api.github.com/repos/bilu-Blen/ATMApp/collaborators{/collaborator}
+                index = collaborators.lastIndexOf('{');
+                collaborators = collaborators.substring(0, index);
 
+                ResponseEntity<List<Collaborators>> collaboratorsresponse =
+                restTemplate.exchange(collaborators + "?access_token=" + token,
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Collaborators>>() {
+                        });
+
+                List<Collaborators> collaboratorsList = collaboratorsresponse.getBody();
+
+                for(Collaborators collaborator : collaboratorsList){
+                    System.out.println("The collaborator/s is/are " + collaborator.getLogin());
+
+                }
             }
 
 

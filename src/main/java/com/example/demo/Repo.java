@@ -7,6 +7,7 @@ public class Repo {
     private String name;
     private User user;
     private String pulls_url;
+    private String collaborators_url;
     private long forks;
     private long traffic_views_uniques;
     private long traffic_clones_uniques;
@@ -14,6 +15,14 @@ public class Repo {
     private Set<String> languages;
     private Set<String> pulls;
 
+
+    public String getCollaborators_url() {
+        return collaborators_url;
+    }
+
+    public void setCollaborators_url(String collaborators_url) {
+        this.collaborators_url = collaborators_url;
+    }
     public long getForks() {
         return forks;
     }
@@ -92,6 +101,7 @@ public class Repo {
                 "name='"+ name +
                 "pulls_url=" + pulls_url +
                 "forks=" + forks+
+                "collaborators_url" + collaborators_url+
                 "}";
     }
 }

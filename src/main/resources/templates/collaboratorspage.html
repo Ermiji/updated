@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:insert="base :: header"></th:block>
+    <style>
+        .jumbotron {
+            background-color: gainsboro;
+        }
+        .nav{
+            color: black;
+            border-bottom-style: outset;
+            text-align: center;
+            padding: 0px;
+        }
+        .container{
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="base:: nav"></div>
+<div class="jumbotron text-center">
+    <!--<h1>Sep2018 JBC Student's GitHub </h1>-->
+</div>
+<div class="container">
+
+    <ul class="nav">
+        <button><h3>Collaborators</h3></button>
+    </ul>
+   <br />
+    <!--<span th:if="${repo_name==collaborator.repo.name}">-->
+        <ul th:each="collaborator : ${collaborators}">
+            <a>[[${collaborator.login}]]</a>
+        </ul>
+    </span>
+</div>
+
+<div class="emptySpace"></div>
+<div th:replace="base :: footer"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"><head>-->
+<!--<meta charset="UTF-8"/>-->
+<!--<title>Title</title>-->
+<!--&lt;!&ndash;<th:block th:insert="base :: header"></th:block>&ndash;&gt;-->
+<!--</head>-->
+<!--<body>-->
+<!--&lt;!&ndash;<div th:replace="base :: nav"></div>&ndash;&gt;-->
+
+<!--<div class="my-5"></div>-->
+
+<!--<h1 class="text-center text-white">Welcome to Our App!</h1>-->
+<!--<div class="my-5"></div>-->
+<!--<div class="container bg-light-transparent">-->
+<!--<div class="my-4 "></div>-->
+
+
+<!--<div class="my-4" align="center">-->
+<!--<h2 class="text-center py-3 pl-4 pr-5">List of members</h2>-->
+<!--<table>-->
+<!--&lt;!&ndash;<h2>Insecure Page</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;<a href="/secure">Secure Page</a>&ndash;&gt;-->
+<!--<tr class="text-dark">-->
+<!--<th class="pr-3">User Name</th>-->
+<!--&lt;!&ndash;<th class="pr-3">Followers</th>&ndash;&gt;-->
+<!--&lt;!&ndash;<th class="pr-3">Following</th>&ndash;&gt;-->
+<!--</tr>-->
+<!--<tr th:each="user : ${users}">-->
+<!--<td th:text="${user.login}"></td>-->
+<!--&lt;!&ndash;<td th:text="${user.followers}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;<td th:text="${user.following}"></td>&ndash;&gt;-->
+<!--</tr>-->
+<!--</table>-->
+<!--<br/>-->
+
+<!--<div class="pb-5"></div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash;<div class="emptySpace"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div th:replace="base :: footer"></div>&ndash;&gt;-->
+<!--</body>-->
+</html>

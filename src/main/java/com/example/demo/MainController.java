@@ -9,12 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainController {
 
-
-
-
-
-
-
     //        @Autowired
 //        CloudinaryConfig cloudinaryConfig;
     @Autowired
@@ -23,6 +17,11 @@ public class MainController {
     @Autowired
     RepoRepository repoRepository;
 
+    @Autowired
+    PullRepository pullRepository;
+
+    @Autowired
+    CollaboratorsRepository collaboratorsRepository;
 
     @RequestMapping("/")
     public String Home(Model model /*,String login*/) {
@@ -31,15 +30,58 @@ public class MainController {
 //user's count
         return "homepage";
     }
+//    @RequestMapping("/userDetail/{login}")
+//    public String showDetail(@PathVariable("login") String login, Model model) {
+//        model.addAttribute("repos", repoRepository.findAll());
+//        model.addAttribute("user",userRepository.findByLogin(login));
+////user's count
+//        return "userpage";
+//    }
+
     @RequestMapping("/userDetail/{login}")
-    public String showDetail(@PathVariable("login") String login, Model model) {
+    public String showDetail(@PathVariable("login") String login, Model model, String name) {
         model.addAttribute("user",userRepository.findByLogin(login));
         // model.addAttribute("user",userRepository.findById(id));
 //user's count
+        model.addAttribute("repo",repoRepository.findByName(name) );
+        model.addAttribute("repos",repoRepository.findAll());
+
         return "userpage";
     }
 
 
+//    @RequestMapping("/repopage")
+//    public String repoPage(Model model /*,String login*/) {
+//        model.addAttribute("repos",repoRepository.findAll());
+//        //model.addAttribute("counter",userRepository.countByLogin(login));
+////user's count
+//        return "collaboratorspage";
+//    }
 
+    @RequestMapping("/repoDetail/{name}")
+    public String showDetail(/*@PathVariable("name") String name,*/ @PathVariable("name") String name,Model model) {
+        model.addAttribute("repo",repoRepository.findByName(name));
+        model.addAttribute("pulls",pullRepository.findAll());
+
+        return "repodetails";
+    }
+
+    @RequestMapping("/collaborator")
+    public String showCollaborators(@PathVariable("name") String name, Model model) {
+
+        model.addAttribute("repo_name",repoRepository.findByName(name) );
+        model.addAttribute("collaborators", collaboratorsRepository.findAll());
+//        model.addAttribute("collaborator", collaboratorsRepository.findByLogin(login));
+
+        return "collaboratorspage";
+    }
+//    public String showCollaborators(@PathVariable("login") String login, Model model) {
+//
+//        //model.addAttribute("repo",repoRepository.findByName(name) );
+//        model.addAttribute("collaborators", collaboratorsRepository.findAll());
+//        model.addAttribute("collaborator", collaboratorsRepository.findByLogin(login));
+//
+//        return "collaboratorspage";
+//    }
 
 }

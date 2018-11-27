@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -21,12 +21,13 @@
     </style>
 </head>
 <body>
-<div th:replace="base :: navlinks"></div>
+<div th:replace="base:: nav"></div>
 <div class="container">
     <div class="row">
         <div class="column">
             <div class="card text-center">
                 <h3 th:text="${user.login}"></h3>
+                <br />
             </div>
         </div>
     </div>
@@ -34,18 +35,26 @@
     <div class="column">
         <div class="card">
             <ul class="nav">
-                <li><h4>Repositories</h4></li>
-                <li th:inline="text"><h4>Followers<span class="w3-badge w3-small w3-gray w3-padding">[[${user.followers}]]</span></h4></li>
-                <li th:inline="text"><h4>Following<span class="w3-badge w3-small w3-gray w3-padding">[[${user.following}]]</span></h4></li>
+                <li><h4>&nbsp;Repositories</h4></li>
+                <li class="space"></li>
+                <li class="space"></li>
+                <li class="space"></li>
+                <li class="space"></li>
+                <li th:inline="text"><h4>Followers<span class="w3-badge w3-small w3-gray w3-padding"> &nbsp;&nbsp;[[${user.followers}]]</span></h4></li>
+                <li th:inline="text"><h4>Following<span class="w3-badge w3-small w3-gray w3-padding"> &nbsp;&nbsp;[[${user.following}]]</span></h4></li>
+            </ul>
+            <ul>
+            <br />
+                <div  th:each="repo : ${repos}">
+                <strong><a th:href="@{/repoDetail/{name}(name=${repo.name})}">[[${repo.name}]]</a></strong>
+                </div>
             </ul>
         </div>
     </div>
-    <ul class="w3-ul w3-hoverable w3-large">
-        <li>Repo 1</li>
-        <li>Repo 2</li>
-        <li>Repo 3</li>
-        <li>Repo 4</li>
-    </ul>
+
 </div>
+
+<div class="emptySpace"></div>
+<div th:replace="base :: footer"></div>
 </body>
 </html>

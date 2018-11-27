@@ -29,13 +29,24 @@
 </head>
 
 <body>
-<div th:fragment="navlinks">
-    <div class="w3-container">
-        <div class="w3-bar w3-border w3-black">
-            <a class="w3-bar-item"><b>My Github</b></a>
-            <a href="/" class="w3-bar-item w3-button w3-left">Home</a>
-        </div>
+<div th:fragment="nav">
+    <nav class="navbar navbar navbar-expand-lg navbar-light bg-dark" th:fragment="main-navbar">
+        <a class="navbar-brand text-white" href="/">&nbsp;&nbsp;My Github</a>
+            <!--<div class="w3-container"> -->
+            <!--<div class="w3-bar w3-border w3-black">-->
+            <!--<a class="w3-bar-item"><b>My Github</b></a>-->
+            <a href="/" class="w3-bar-item text-white w3-button w3-left">Home</a>
+            <!--</div>-->
+            <div class="space"></div>
+    </nav>
+</div>
+
+<footer th:fragment="footer" class="navbar navbar navbar-expand-lg navbar-light bg-dark fixed-bottom">
+    <div class="navbar-brand text-muted text-white" >
+        <h6>&copy; 2018 Using MyGitHub </h6>
     </div>
+</footer>
+
 </div>
 </body>
 </html>

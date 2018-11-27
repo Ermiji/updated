@@ -4,8 +4,9 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface RepoRepository extends CrudRepository<Repo,Long>{
 
-//    Repos findByOwner(String owner);
+//    Repo findByOwner(String owner);
         Repo findByName(String name);
+        Repo findById(long id);
 
 
 }

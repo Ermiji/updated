@@ -1,7 +1,16 @@
 package com.example.demo;
 
-public class Pull {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Entity
+public class Pull {
+    @Id
+    @GeneratedValue()
     private long id;
     private String title;
 

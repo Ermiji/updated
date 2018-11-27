@@ -3,6 +3,7 @@ package com.example.demo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
@@ -12,19 +13,22 @@ public class Repo {
     @GeneratedValue()
     private long id;
     private String name;
-
+    private String html_url;
     private String pulls_url;
     private String collaborators_url;
     private long forks;
     private long traffic_views_uniques;
     private long traffic_clones_uniques;
-
+    private String language;
 //    private Set<String> languages;
 //    private Set<String> pulls;
 
     @ManyToOne(fetch = FetchType.EAGER)
     //@JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany
+    private List<Collaborators> collaborators;
 
 
 
@@ -115,5 +119,29 @@ public class Repo {
                 "forks=" + forks+
                 "collaborators_url" + collaborators_url+
                 "}";
+    }
+
+    public String getHtml_url() {
+        return html_url;
+    }
+
+    public void setHtml_url(String html_url) {
+        this.html_url = html_url;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public List<Collaborators> getCollaborators() {
+        return collaborators;
+    }
+
+    public void setCollaborators(List<Collaborators> collaborators) {
+        this.collaborators = collaborators;
     }
 }

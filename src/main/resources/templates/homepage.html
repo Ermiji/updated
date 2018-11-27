@@ -20,30 +20,24 @@
     </style>
 </head>
 <body>
-<div th:replace="base :: navlinks"></div>
+<div th:replace="base:: nav"></div>
 <div class="jumbotron text-center">
-    <h1>JBCSep2018</h1>
+    <h1>Sep2018 JBC Student's GitHub </h1>
 </div>
 <div class="container">
 
     <ul class="nav">
-        <li><h3>Members List <span class="w3-badge w3-small w3-gray w3-padding">17</span></h3></li>
-        <!--<li><h3>&nbsp;&nbsp;&nbsp;Followers </h3></li>-->
-        <!--<li><h3>&nbsp;&nbsp;&nbsp;Following </h3></li>-->
+        <button><h3>Members List <span class="w3-badge w3-small w3-gray w3-padding">17</span></h3></button>
+
+
     </ul><br>
         <ul th:each="user : ${users}">
             <a th:href="@{/userDetail/{login}(login=${user.login})}">[[${user.login}]]</a>
-            <!--<a th:href="@{/userDetail}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[${user.following}]]</a>-->
-            <!--<a th:href="@{/userDetail}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[${user.followers}]]</a>-->
-            <!--&lt;!&ndash;(id={user.id})}" >[[${user.login}]]</a>&ndash;&gt;-->
         </ul>
-        <!--&lt;!&ndash;<li><a href="#">Member 1</a></li>&ndash;&gt;-->
-        <!--<li><a href="#">Member 2</a></li>-->
-        <!--<li><a href="#">Member 3</a></li>-->
-        <!--<li><a href="#">Member 4</a></li>-->
-        <!--<li><a href="#">Member 5</a></li>-->
-    <!--</ul>-->
 </div>
+
+<div class="emptySpace"></div>
+<div th:replace="base :: footer"></div>
 </body>
 </html>
 

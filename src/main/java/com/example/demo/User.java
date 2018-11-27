@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.net.URI;
 import java.net.URL;
+import java.util.List;
 import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -21,7 +22,7 @@ public class User {
     private int following;
 
     @OneToMany
-    private Set<Repo> repos;
+    private List<Repo> repos;
 
     public int getFollowing() {
         return following;
@@ -78,11 +79,11 @@ public class User {
         this.followers = followers;
     }
 
-    public Set<Repo> getRepos() {
+    public List<Repo> getRepos() {
         return repos;
     }
 
-    public void setRepos(Set<Repo> repos) {
+    public void setRepos(List<Repo> repos) {
         this.repos = repos;
     }
 }

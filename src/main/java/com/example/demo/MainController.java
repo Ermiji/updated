@@ -39,7 +39,7 @@ public class MainController {
 //    }
 
     @RequestMapping("/userDetail/{login}")
-    public String showDetail(@PathVariable("login") String login, Model model, String name) {
+    public String userDetails(@PathVariable("login") String login, Model model, String name) {
         model.addAttribute("user",userRepository.findByLogin(login));
         // model.addAttribute("user",userRepository.findById(id));
 //user's count
@@ -49,29 +49,22 @@ public class MainController {
         return "userpage";
     }
 
-
-//    @RequestMapping("/repopage")
-//    public String repoPage(Model model /*,String login*/) {
-//        model.addAttribute("repos",repoRepository.findAll());
-//        //model.addAttribute("counter",userRepository.countByLogin(login));
-////user's count
-//        return "collaboratorspage";
-//    }
-
     @RequestMapping("/repoDetail/{name}")
-    public String showDetail(/*@PathVariable("name") String name,*/ @PathVariable("name") String name,Model model) {
+    public String reposDetail(@PathVariable("name") String name,Model model,String login) {
         model.addAttribute("repo",repoRepository.findByName(name));
-        model.addAttribute("pulls",pullRepository.findAll());
+        //model.addAttribute("pulls",pullRepository.findAll());
+        //model.addAttribute("collaborators", collaboratorsRepository.findAll());
+       // model.addAttribute("collaborator", collaboratorsRepository.findByLogin(login));
 
         return "repodetails";
     }
 
-    @RequestMapping("/collaborator")
-    public String showCollaborators(@PathVariable("name") String name, Model model) {
+    @RequestMapping("/collaborator/{login}")
+    public String showCollaborators(@PathVariable("login") String login, Model model, String name) {
 
-        model.addAttribute("repo_name",repoRepository.findByName(name) );
-        model.addAttribute("collaborators", collaboratorsRepository.findAll());
-//        model.addAttribute("collaborator", collaboratorsRepository.findByLogin(login));
+        model.addAttribute("repo",repoRepository.findByName(name));
+        //model.addAttribute("collaborators", collaboratorsRepository.findAll());
+  model.addAttribute("collaborator", collaboratorsRepository.findByLogin(login));
 
         return "collaboratorspage";
     }
@@ -81,6 +74,13 @@ public class MainController {
 //        model.addAttribute("collaborators", collaboratorsRepository.findAll());
 //        model.addAttribute("collaborator", collaboratorsRepository.findByLogin(login));
 //
+//        return "collaboratorspage";
+//    }
+    //    @RequestMapping("/repopage")
+//    public String repoPage(Model model /*,String login*/) {
+//        model.addAttribute("repos",repoRepository.findAll());
+//        //model.addAttribute("counter",userRepository.countByLogin(login));
+////user's count
 //        return "collaboratorspage";
 //    }
 

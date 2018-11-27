@@ -47,19 +47,19 @@ public class DemoApplication {
 
     private static void getUsingToken(){
         RestTemplate restTemplate = new RestTemplate();
-        String token = "082faaae3278b72aabc601577689f57894715f66";
+        String token = "2662f201cef0dac238f1d774c1f5ac75833d64c4";
 	}
 
 
     @Bean
     public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
         return (String... args) -> {
-            String token = "082faaae3278b72aabc601577689f57894715f66";
+            String token = "2662f201cef0dac238f1d774c1f5ac75833d64c4";
 
-            User user1 = restTemplate.getForObject("https://api.github.com/users/MelakMinlargilih?access_token="+token,  User.class);
+            User user= restTemplate.getForObject("https://api.github.com/users/MelakMinlargilih?access_token="+token,  User.class);
 
-            log.info(user1.toString());
-            user1.setRepos_url(user1.getRepos_url());
+            log.info(user.toString());
+            user.setRepos_url(user.getRepos_url());
 
 
  /*These work to get  the number of followers on following
@@ -70,7 +70,7 @@ public class DemoApplication {
 
             //since it is an array what is returned use this method
             ResponseEntity<List<Repo>> repoResponse =
-                    restTemplate.exchange(user1.getRepos_url()+"?access_token="+token,
+                    restTemplate.exchange(user.getRepos_url()+"?access_token="+token,
                             HttpMethod.GET,null, new ParameterizedTypeReference<List<Repo>>() {
                             });
             List<Repo> repos = repoResponse.getBody();
@@ -149,7 +149,7 @@ public class DemoApplication {
                 log.info(user1.getLogin());*/
 
             //}
-            userRepository.save(user1);
+            userRepository.save(user);
 
         };
     }

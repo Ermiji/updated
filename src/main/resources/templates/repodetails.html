@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:insert="base :: header"></th:block>
+    <style>
+        .nav{
+            color: black;
+            border-bottom-style: outset;
+            text-align: center;
+            padding: 0px;
+        }
+        .leftcolumn {
+            width: 100%;
+            padding: 0;
+        }
+        .container{
+            background-color: whitesmoke;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="base:: nav"></div>
+<div class="container">
+    <div class="row">
+        <div class="column">
+            <div class="card text-center">
+                <h3 th:text="${repo.name}"></h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card">
+            <ul class="nav">
+                <li><h4>Repository details</h4></li>
+                <li class="space"></li><li class="space"></li>
+                <li th:inline="text"><p>Forks<span class="w3-badge w3-small w3-gray w3-padding">[[${repo.forks}]]</span></p></li>
+                <li class="space"></li>
+                <li th:inline="text"><p>Languages<span class="w3-badge w3-small w3-gray w3-padding">[[${repo.language}]]</span></p></li>
+                <!--<li th:inline="text"><p>Collaborators<span class="w3-badge w3-small w3-gray w3-padding">[[${repo.language}]]</span></p></li>-->
+                <!--<div  th:each="repo : ${repos}">-->
+                    <strong><a th:href="@{/collaborator/{login}(login=${collaborator.login})}">Collaborators</a></strong>
+                <!--<li th:inline="text"><a th:href="@{/collaborator/{login}(login=${repo.collaborators.login})}">Collaborators</a></li>-->
+                <!--<li th:inline="text"><a th:href="@{/collaborator/{login}(login=${repo.collaborators.login})}">Collaborators</a></li>-->
+                <!--</div>-->
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div class="emptySpace"></div>
+<div th:replace="base :: footer"></div>
+</body>
+</html>

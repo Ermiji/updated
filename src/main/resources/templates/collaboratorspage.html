@@ -30,11 +30,10 @@
         <button><h3>Collaborators</h3></button>
     </ul>
    <br />
-    <!--<span th:if="${repo_name==collaborator.repo.name}">-->
-        //<ul th:each="collaborator : ${collaborators}">
-            <a>[[${collaborator.login}]]</a>
-        </ul>
-    </span>
+    <div  th:each=" collaborator: ${collaborators}">
+             <a>[[${collaborator.login}]]</a>
+</ul>
+</span>
 </div>
 
 <div class="emptySpace"></div>

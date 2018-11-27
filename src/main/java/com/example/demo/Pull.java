@@ -13,6 +13,17 @@ public class Pull {
     @GeneratedValue()
     private long id;
     private String title;
+    private int Counter;
+
+    public int getCounter() {
+        return Counter;
+    }
+
+    public void setCounter(int counter) {
+        Counter = counter;
+    }
+
+
 
 
     public long getId() {

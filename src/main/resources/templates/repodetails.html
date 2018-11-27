@@ -35,19 +35,19 @@
         <div class="card">
             <ul class="nav">
                 <li><h4>Repository details</h4></li>
-                <li class="space"></li><li class="space"></li>
-                <li th:inline="text"><p>Forks<span class="w3-badge w3-small w3-gray w3-padding">[[${repo.forks}]]</span></p></li>
-                <li class="space"></li>
+                <li th:inline="text"><h4>Forks<span class="w3-badge w3-small w3-gray w3-padding">[[${repo.forks}]]</span></h4></li>
                 <li th:inline="text"><p>Languages<span class="w3-badge w3-small w3-gray w3-padding">[[${repo.language}]]</span></p></li>
-                <!--<li th:inline="text"><p>Collaborators<span class="w3-badge w3-small w3-gray w3-padding">[[${repo.language}]]</span></p></li>-->
-                <!--<div  th:each="repo : ${repos}">-->
-                    <strong><a th:href="@{/collaborator/{login}(login=${collaborator.login})}">Collaborators</a></strong>
-                <!--<li th:inline="text"><a th:href="@{/collaborator/{login}(login=${repo.collaborators.login})}">Collaborators</a></li>-->
-                <!--<li th:inline="text"><a th:href="@{/collaborator/{login}(login=${repo.collaborators.login})}">Collaborators</a></li>-->
-                <!--</div>-->
+                <li th:inline="text"><p>Pulls<span class="w3-badge w3-small w3-gray w3-padding">[[${pull.counter}]]</span></p>
+                </li>
             </ul>
-        </div>
-    </div>
+            <ul class="w3-ul w3-hoverable w3-large">
+                <strong> <h4>Collaborators</h4></strong>
+                <div th:each="collaborator : ${collaboratorsList}">
+                    <p >[[${collaborator.login}]]</p>
+                </div>
+
+
+            </ul>
 
 </div>
 
